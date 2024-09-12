@@ -1,0 +1,126 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	-webkit-tap-highlight-color: transparent;
+}
+
+html {
+	font-size: 20px;
+}
+
+body {
+	font-weight: 400;
+	height: 100vh;
+	color: black;
+	line-height: normal;
+	text-rendering: optimizespeed;
+	background-color: white;
+	scroll-behavior: smooth;
+	overflow-x: hidden;
+}
+
+/* Links */
+
+a {
+	display: block;
+	color: inherit;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+/* Common */
+
+aside,
+nav,
+footer,
+header,
+section,
+main {
+	display: block;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	font-style: normal;
+	color: inherit;
+	font-size: inherit;
+	font-weight: inherit;
+	line-height: inherit;
+}
+
+ul,
+ul li {
+	list-style: none;
+}
+
+img {
+	max-width: 100%;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+address {
+	font-style: normal;
+}
+
+/* Form */
+
+input,
+textarea,
+button,
+select {
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	background-color: transparent;
+	border: none;
+	outline: none;
+}
+
+input::-ms-clear {
+	display: none;
+}
+
+button,
+input[type='submit'] {
+	display: inline-block;
+	box-shadow: none;
+	background-color: transparent;
+	cursor: pointer;
+}
+
+input:focus,
+input:active,
+button:focus,
+button:active {
+	outline: none;
+}
+
+button::-moz-focus-inner {
+	padding: 0;
+	border: 0;
+}
+
+.leaflet-left {
+	left: 350px !important;
+}
+
+.leaflet-control-attribution {
+	display: none !important;
+}
+.leaflet-popup-content-wrapper {
+	width: max-content !important;
+}
+.leaflet-popup-content {
+	margin: 20px;
+}
