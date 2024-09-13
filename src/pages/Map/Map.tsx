@@ -26,6 +26,8 @@ import { RootState } from '../../store/store';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../../store/slices/authSlice';
 import { spawn } from 'child_process';
+import LogoutIcon from '../../assets/icon/LogoutIcon';
+import USerIcon from '../../assets/icon/USerIcon';
 
 const customMarker = new L.Icon({
 	iconUrl: markerIcon,
@@ -275,10 +277,10 @@ export default function Map({}: MapProps) {
 					)}
 				</MapContainer>
 				<div className={s.header}>
-					<img className={s.icon} src="./assets/userIcon.webp" />
+					<USerIcon width={25} height={25} />
 					<span>{username}</span>
 					<button onClick={handleLogout} className={s.exitButton}>
-						<img className={s.iconExit} src="./assets/exitIcon.png" />
+						<LogoutIcon width={25} height={25} />
 					</button>
 				</div>
 			</div>
