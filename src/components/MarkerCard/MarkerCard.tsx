@@ -1,5 +1,6 @@
+import { MarkerData } from '../../types/marker';
 import FindButton from '../Button/FindButton';
-import { MarkerData } from '../Map/Map';
+
 import s from './MarkerCard.module.scss';
 
 interface MarkerCardProps {

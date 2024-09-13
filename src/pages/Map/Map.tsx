@@ -14,12 +14,18 @@ import { LatLngExpression, LatLng } from 'leaflet';
 import L from 'leaflet';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
-import ControlPanel from '../ControlPanel';
+import ControlPanel from '../../components/ControlPanel';
 
 import userIconImg from '../../assets/userPng.png';
 
-import FindButton from '../Button/FindButton';
-import MarkerCard from '../MarkerCard';
+import FindButton from '../../components/Button';
+import MarkerCard from '../../components/MarkerCard';
+import { MarkerData } from '../../types/marker';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import { useNavigate } from 'react-router-dom';
+import { logout } from '../../store/slices/authSlice';
+import { spawn } from 'child_process';
 
 const customMarker = new L.Icon({
 	iconUrl: markerIcon,
@@ -36,14 +42,6 @@ const userIcon = new L.Icon({
 	iconAnchor: [15, 50],
 	popupAnchor: [0, -40],
 });
-
-export interface MarkerData {
-	position: LatLngExpression;
-	description: string;
-	category: string;
-	image?: string | null;
-	createdAt: string;
-}
 
 const AddMarkerToClick = ({
 	addMarker,
@@ -81,6 +79,11 @@ export default function Map({}: MapProps) {
 		null
 	);
 
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
+	const username = useSelector((state: RootState) => state.auth.username);
+
 	const mapRef = useRef<any>(null);
 	const markerRefs = useRef<(L.Marker | null)[]>([]);
 
@@ -89,6 +92,15 @@ export default function Map({}: MapProps) {
 	useEffect(() => {
 		localStorage.setItem('markers', JSON.stringify(markers));
 	}, [markers]);
+
+	const handleLogout = () => {
+		// Удаляем данные пользователя из localStorage
+		localStorage.removeItem('username');
+		localStorage.removeItem('password');
+		// Диспатчим действие выхода
+		dispatch(logout());
+		navigate('/');
+	};
 
 	const addMarker = (latlng: LatLng) => {
 		setSelectedMarker(latlng);
@@ -198,6 +210,7 @@ export default function Map({}: MapProps) {
 				flyToMarker={flyToMarker}
 				filter={filter}
 				setFilter={setFilter}
+				locateUser={locateUser}
 			/>
 
 			<div style={{ flex: 1 }}>
@@ -261,7 +274,13 @@ export default function Map({}: MapProps) {
 						</Marker>
 					)}
 				</MapContainer>
-				<FindButton onClick={locateUser}>Find Me!</FindButton>
+				<div className={s.header}>
+					<img className={s.icon} src="./assets/userIcon.webp" />
+					<span>{username}</span>
+					<button onClick={handleLogout} className={s.exitButton}>
+						<img className={s.iconExit} src="./assets/exitIcon.png" />
+					</button>
+				</div>
 			</div>
 		</div>
 	);

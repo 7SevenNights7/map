@@ -1,6 +1,7 @@
 import { LatLngExpression } from 'leaflet';
 import s from './ControlPanel.module.scss';
-import { MarkerData } from '../Map/Map';
+import { MarkerData } from '../../types/marker';
+import FindButton from '../Button/FindButton';
 
 interface ControlPanelProps {
 	filteredMarkers: MarkerData[];
@@ -11,6 +12,7 @@ interface ControlPanelProps {
 	flyToMarker: (value: LatLngExpression) => void;
 	filter: string;
 	setFilter: (value: string) => void;
+	locateUser: () => void;
 }
 
 export default function ControlPanel({
@@ -22,6 +24,7 @@ export default function ControlPanel({
 	flyToMarker,
 	filter,
 	setFilter,
+	locateUser,
 }: ControlPanelProps) {
 	return (
 		<div className={s.container}>
@@ -73,6 +76,7 @@ export default function ControlPanel({
 					</div>
 				))}
 			</div>
+			<FindButton onClick={locateUser}>Find me!</FindButton>
 		</div>
 	);
 }

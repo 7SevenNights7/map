@@ -1,11 +1,15 @@
 import React from 'react';
 
-import Map from './components/Map';
-
 import './style/global.scss';
+import { BrowserRouter } from 'react-router-dom';
+import Router from './Router';
 
 const App: React.FC = () => {
-	return <Map />;
+	return (
+		<BrowserRouter>
+			<Router />
+		</BrowserRouter>
+	);
 };
 
 export default App;
